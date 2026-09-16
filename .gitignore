@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Environment (never commit secrets)
+.env
+
+# Uploaded files (user content lives on the server)
+server/src/uploads/*
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.idea/
+.vscode/
+*.swp
