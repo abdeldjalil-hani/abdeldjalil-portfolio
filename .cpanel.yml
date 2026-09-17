@@ -1,4 +1,62 @@
 ---
+# cPanel Git Version Control — deployment tasks for abdeldjalil-portfolio.
+# These run every time a commit is deployed from the "Git Version Control"
+# interface. Working directory = repository checkout; $HOME = /home/uthapxpe.
+#
+# Targets:
+#   Frontend document root : /home/uthapxpe/public_html
+#   Backend application root: /home/uthapxpe/portfolio-api
 deployment:
   tasks:
-    - /bin/echo "Git deployment initialized"
+
+    # ============================================================
+    # FRONTEND — build the React (Vite) app, then publish it
+    # ============================================================
+
+    # Copy client/ sources into a temporary build folder ($HOME/.tmp) so
+    # node_modules and build output never pollute the repository checkout.
+    # The folder is wiped first so each deploy starts from a clean copy.
+    - |
+      rm -rf "$HOME/.tmp/abdeldjalil-client-build"
+      mkdir -p "$HOME/.tmp"
+      cp -pR "client" "$HOME/.tmp/abdeldjalil-client-build"
+
+    # Install frontend dependencies and generate the production bundle.
+    # Output lands in: $HOME/.tmp/abdeldjalil-client-build/dist
+    - |
+      cd "$HOME/.tmp/abdeldjalil-client-build"
+      npm install
+      npm run build
+
+    # Publish only the built app (contents of client/dist) to the public
+    # document root. This is an additive copy: existing files such as
+    # .htaccess or any other content already in public_html are untouched.
+    - |
+      mkdir -p /home/uthapxpe/public_html
+      cp -pR "$HOME/.tmp/abdeldjalil-client-build/dist/." /home/uthapxpe/public_html/
+
+    # ============================================================
+    # BACKEND — deploy the Node.js (Express) API source
+    # ============================================================
+
+    # Copy the server/ source into the "Setup Node.js App" application root
+    # (/home/uthapxpe/portfolio-api). Exclusions:
+    #   - node_modules : not copied; run `npm install --production` on cPanel
+    #   - .env, .env.* : secrets stay only on the server / repo never ships them
+    #   - src/uploads  : server-side user uploads must be preserved
+    #
+    # The tar pipe EXTRACTS into the existing folder and never deletes it, so
+    # runtime-generated files (especially portfolio-api/src/uploads) survive
+    # every deployment intact.
+    - |
+      mkdir -p /home/uthapxpe/portfolio-api
+      tar -C "server" \
+        --exclude="node_modules" \
+        --exclude=".env" \
+        --exclude=".env.*" \
+        --exclude="src/uploads" \
+        -cpf - . | tar -xpf - -C /home/uthapxpe/portfolio-api
+
+    # Clean up the temporary build folder used for the frontend.
+    - |
+      rm -rf "$HOME/.tmp/abdeldjalil-client-build"
