@@ -3,6 +3,11 @@ node_modules/
 
 # Environment (never commit secrets)
 .env
+.env.*
+!.env.example
+
+# Build output (generated locally / on server)
+client/dist/
 
 # Uploaded files (user content lives on the server)
 server/src/uploads/*

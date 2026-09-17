@@ -21,7 +21,7 @@ app.use(helmet({
   crossOriginResourcePolicy: { policy: 'same-site' },
 }));
 
-const allowedOrigins = (process.env.CORS_ORIGINS || process.env.SITE_URL || '').split(',').map((s) => s.trim()).filter(Boolean);
+const allowedOrigins = (process.env.CLIENT_URL || process.env.CORS_ORIGINS || process.env.SITE_URL || '').split(',').map((s) => s.trim()).filter(Boolean);
 app.use(cors({
   origin(origin, cb) {
     if (!origin || allowedOrigins.length === 0 || allowedOrigins.includes(origin)) return cb(null, true);
