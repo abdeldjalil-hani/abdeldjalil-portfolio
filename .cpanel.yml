@@ -1,6 +1,6 @@
 ---
 deployment:
   tasks:
-    - "which node > /home/uthapxpe/cpanel-node-path-test.txt"
-    - "which npm >> /home/uthapxpe/cpanel-node-path-test.txt || true"
-    - "find /home/uthapxpe/nodevenv/portfolio-api/24 -name npm -type f -o -name npm-cli.js -type f >> /home/uthapxpe/cpanel-node-path-test.txt 2>/dev/null || true"
+    - "source /home/uthapxpe/nodevenv/portfolio-api/24/bin/activate && node --version > /home/uthapxpe/cpanel-node-env-test.txt"
+    - "source /home/uthapxpe/nodevenv/portfolio-api/24/bin/activate && npm --version >> /home/uthapxpe/cpanel-node-env-test.txt"
+    - "echo NODE_ENV_TEST_DONE >> /home/uthapxpe/cpanel-node-env-test.txt"
