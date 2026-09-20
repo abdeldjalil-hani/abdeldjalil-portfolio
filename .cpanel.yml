@@ -1,6 +1,0 @@
----
-deployment:
-  tasks:
-    - "rm -rf /home/uthapxpe/.tmp/npm-test && mkdir -p /home/uthapxpe/.tmp/npm-test && cp -pR client/. /home/uthapxpe/.tmp/npm-test/"
-    - "source /home/uthapxpe/nodevenv/portfolio-api/24/bin/activate && cd /home/uthapxpe/.tmp/npm-test && npm install"
-    - "echo NPM_INSTALL_TEST_OK > /home/uthapxpe/.tmp/npm-test/result.txt"
