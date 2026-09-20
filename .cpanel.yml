@@ -1,6 +1,6 @@
 ---
 deployment:
   tasks:
-    - /bin/echo "CPANEL TEST OK"
-    - /bin/mkdir -p /home/uthapxpe/cpanel-test
-    - /bin/touch /home/uthapxpe/cpanel-test/test.txt
+    - "rm -rf \"$HOME/.tmp/abdeldjalil-client-build\" && mkdir -p \"$HOME/.tmp\" && cp -pR client \"$HOME/.tmp/abdeldjalil-client-build\" && cd \"$HOME/.tmp/abdeldjalil-client-build\" && npm install && npm run build && mkdir -p /home/uthapxpe/public_html && cp -pR \"$HOME/.tmp/abdeldjalil-client-build/dist/.\" /home/uthapxpe/public_html/ && echo \"FRONTEND DEPLOYED OK\" || { echo \"FRONTEND DEPLOY FAILED: deployment aborted\" >&2; exit 1; }"
+    - "mkdir -p /home/uthapxpe/portfolio-api && tar -C server --exclude=node_modules --exclude=.env --exclude='.env.*' --exclude=src/uploads -cpf - . | tar -xpf - -C /home/uthapxpe/portfolio-api && echo \"BACKEND DEPLOYED OK\" || { echo \"BACKEND DEPLOY FAILED\" >&2; exit 1; }"
+    - "rm -rf \"$HOME/.tmp/abdeldjalil-client-build\""
