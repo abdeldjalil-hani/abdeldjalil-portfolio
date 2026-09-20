@@ -1,8 +1,6 @@
 ---
 deployment:
   tasks:
-    - "mkdir -p /home/uthapxpe/backend-copy-test"
-    - "cp -pR server/. /home/uthapxpe/backend-copy-test/"
-    - "test -f /home/uthapxpe/backend-copy-test/package.json"
-    - "test -f /home/uthapxpe/backend-copy-test/package-lock.json"
-    - "echo BACKEND_COPY_OK > /home/uthapxpe/backend-copy-test/result.txt"
+    - "which node > /home/uthapxpe/cpanel-node-path-test.txt"
+    - "which npm >> /home/uthapxpe/cpanel-node-path-test.txt || true"
+    - "find /home/uthapxpe/nodevenv/portfolio-api/24 -name npm -type f -o -name npm-cli.js -type f >> /home/uthapxpe/cpanel-node-path-test.txt 2>/dev/null || true"
