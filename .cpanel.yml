@@ -1,7 +1,8 @@
 ---
 deployment:
   tasks:
-    - "mkdir -p /home/uthapxpe/cpanel-npm-test"
-    - "node --version > /home/uthapxpe/cpanel-npm-test/node-version.txt"
-    - "npm --version > /home/uthapxpe/cpanel-npm-test/npm-version.txt"
-    - "echo DEPLOYMENT_NPM_TEST_OK > /home/uthapxpe/cpanel-npm-test/result.txt"
+    - "mkdir -p /home/uthapxpe/backend-copy-test"
+    - "cp -pR server/. /home/uthapxpe/backend-copy-test/"
+    - "test -f /home/uthapxpe/backend-copy-test/package.json"
+    - "test -f /home/uthapxpe/backend-copy-test/package-lock.json"
+    - "echo BACKEND_COPY_OK > /home/uthapxpe/backend-copy-test/result.txt"
