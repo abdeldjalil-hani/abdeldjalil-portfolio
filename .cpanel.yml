@@ -1,5 +1,7 @@
 ---
 deployment:
   tasks:
-    - "cd client && npm install && npm run build"
-    - "mkdir -p /home/uthapxpe/cpanel-frontend-test && touch /home/uthapxpe/cpanel-frontend-test/build-success.txt"
+    - "mkdir -p /home/uthapxpe/cpanel-npm-test"
+    - "node --version > /home/uthapxpe/cpanel-npm-test/node-version.txt"
+    - "npm --version > /home/uthapxpe/cpanel-npm-test/npm-version.txt"
+    - "echo DEPLOYMENT_NPM_TEST_OK > /home/uthapxpe/cpanel-npm-test/result.txt"
