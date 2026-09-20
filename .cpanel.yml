@@ -1,6 +1,12 @@
 ---
 deployment:
   tasks:
-    - "source /home/uthapxpe/nodevenv/portfolio-api/24/bin/activate && node --version > /home/uthapxpe/cpanel-node-env-test.txt"
-    - "source /home/uthapxpe/nodevenv/portfolio-api/24/bin/activate && npm --version >> /home/uthapxpe/cpanel-node-env-test.txt"
-    - "echo NODE_ENV_TEST_DONE >> /home/uthapxpe/cpanel-node-env-test.txt"
+    - "source /home/uthapxpe/nodevenv/portfolio-api/24/bin/activate && rm -rf /home/uthapxpe/.tmp/abdeldjalil-client-build && mkdir -p /home/uthapxpe/.tmp/abdeldjalil-client-build && cp -pR client/. /home/uthapxpe/.tmp/abdeldjalil-client-build/ && cd /home/uthapxpe/.tmp/abdeldjalil-client-build && npm install && npm run build"
+    - "test -d /home/uthapxpe/.tmp/abdeldjalil-client-build/dist && cp -pR /home/uthapxpe/.tmp/abdeldjalil-client-build/dist/. /home/uthapxpe/public_html/"
+    - "rm -rf /home/uthapxpe/.tmp/abdeldjalil-client-build"
+    - "mkdir -p /home/uthapxpe/portfolio-api"
+    - "mkdir -p /home/uthapxpe/.tmp && if [ -d /home/uthapxpe/portfolio-api/src/uploads ]; then cp -pR /home/uthapxpe/portfolio-api/src/uploads /home/uthapxpe/.tmp/uploads-backup; fi"
+    - "cp -pR server/. /home/uthapxpe/portfolio-api/"
+    - "rm -rf /home/uthapxpe/portfolio-api/node_modules"
+    - "find /home/uthapxpe/portfolio-api -maxdepth 1 -name '.env*' -exec rm -rf {} +"
+    - "rm -rf /home/uthapxpe/portfolio-api/src/uploads && if [ -d /home/uthapxpe/.tmp/uploads-backup ]; then mv /home/uthapxpe/.tmp/uploads-backup /home/uthapxpe/portfolio-api/src/uploads; fi && mkdir -p /home/uthapxpe/portfolio-api/src/uploads"
