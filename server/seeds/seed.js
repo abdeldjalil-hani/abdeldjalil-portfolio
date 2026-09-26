@@ -8,7 +8,7 @@
  * Everything written here is EDITABLE placeholder content; it does not
  * fabricate facts. Update it from the admin dashboard after deploy.
  */
-require('dotenv').config({ path: require('path').join(__dirname, '..', '..', '.env') });
+require('../src/config/env');
 
 const sequelize = require('../src/config/database');
 const models = require('../src/models');

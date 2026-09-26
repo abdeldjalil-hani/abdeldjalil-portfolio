@@ -8,7 +8,7 @@
  * In production this is intentionally non-destructive (no ALTER DROP),
  * which is safe to run via SSH or cPanel Terminal on the live database.
  */
-require('dotenv').config({ path: require('path').join(__dirname, '..', '..', '.env') });
+require('../src/config/env');
 
 const sequelize = require('../src/config/database');
 const models = require('../src/models');

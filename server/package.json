@@ -8,7 +8,8 @@
     "dev": "nodemon src/index.js",
     "migrate": "node migrations/run.js",
     "seed": "node seeds/seed.js",
-    "setup": "node migrations/run.js && node seeds/seed.js"
+    "setup": "node migrations/run.js && node seeds/seed.js",
+    "postinstall": "node scripts/postinstall.js"
   },
   "engines": {
     "node": ">=16.0.0"

@@ -13,7 +13,7 @@ export default function UploadField({ value, onChange, subdir, label = 'Upload i
     setBusy(true);
     try {
       const res = await adminApi.upload(subdir, file);
-      onChange(res.url);
+      onChange(res.path);
       toast.success('File uploaded.');
     } catch (err) {
       toast.error(err.message || 'Upload failed.');
